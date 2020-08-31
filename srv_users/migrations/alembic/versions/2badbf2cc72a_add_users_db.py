@@ -54,6 +54,7 @@ def upgrade():
         Column('city', String, nullable=False),
         Column('state_id', Integer, ForeignKey('states.id')),
         Column('zip', Integer, nullable=False),
+        Column('role_id', Integer, ForeignKey('roles.id')),
         Column('added_on', DateTime, default=func.now()),
         Column('is_employee_account', DateTime),
         Column('is_disabled_account', DateTime)
@@ -61,7 +62,7 @@ def upgrade():
 
     op.execute(
         "INSERT INTO users (password_hash, uuid, first_name, last_name, address1, city, state_id, zip, "
-        "added_on, is_employee_account) "
+        "role_id, added_on, is_employee_account) "
         " VALUES "
         "("
             "'" + generate_password_hash("password") + "',"
@@ -69,6 +70,7 @@ def upgrade():
             "'Washington',"
             "(select (id) from states where abbreviation = 'DC'),"
             "20001,"
+            "(select (id) from roles where name = 'administrator'),"
             "datetime('now', 'localtime'),"
             "datetime('now', 'localtime')"
         ")"
