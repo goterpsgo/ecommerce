@@ -7,7 +7,7 @@ Create Date: 2020-08-28 13:39:27.472806
 """
 from alembic import op
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, func, Float
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 import uuid
 import datetime
 
