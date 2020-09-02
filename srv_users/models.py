@@ -1,15 +1,8 @@
-import os
-
-from alembic import op
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, func, Float, orm, PrimaryKeyConstraint
-from sqlalchemy.sql import insert
 import uuid
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
-Session = sessionmaker()
-Base = declarative_base()
+from .database import Base
 
 
 class Role(Base):
@@ -66,4 +59,3 @@ class PaymentCard(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
 
     PrimaryKeyConstraint('id')
-
