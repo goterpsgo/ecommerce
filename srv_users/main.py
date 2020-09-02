@@ -1,3 +1,5 @@
+import os
+
 import uvicorn
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
@@ -28,7 +30,7 @@ def get_roles(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 @app.get("/api/")
 def get_hello_world():
-    return "Hello world"
+    return "pwd: " + os.getcwd()
 
 
 if __name__ == "__main__":
